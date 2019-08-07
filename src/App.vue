@@ -16,21 +16,32 @@
     </v-app-bar>
 
     <v-content>
-      <HelloWorld/>
+      <KbnCard
+        v-for="item in this.$store.getters.allItems"
+        v-bind:key="item.id"
+        v-bind:id="item.id"
+        v-bind:title="item.title"
+      />
+      <KbnForm />
+      <KbnForm />
     </v-content>
   </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld';
+import HelloWorld from "./components/HelloWorld";
+import KbnForm from "./components/KbnForm";
+import KbnCard from "./components/KbnCard";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
     HelloWorld,
+    KbnForm,
+    KbnCard
   },
   data: () => ({
     //
-  }),
+  })
 };
 </script>
