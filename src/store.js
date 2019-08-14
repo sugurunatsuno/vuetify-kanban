@@ -5,22 +5,26 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    list: [{ title: "test", id: 0 }],
+    lists: [],
     maxId: 0
   },
   mutations: {
     addList(state, payload) {
-      state.list.push({ title: payload.title, id: state.maxId + 1 });
+      state.lists.push({
+        title: payload.title,
+        id: state.maxId + 1,
+        listId: payload.listId
+      });
       state.maxId++;
     },
     removeAt(state, payload) {
-      state.list = state.list.filter(value => value.id !== payload.id);
+      state.lists = state.lists.filter(value => value.id !== payload.id);
     }
   },
   actions: {},
   getters: {
     allItems(state) {
-      return state.list;
+      return state.lists;
     }
   }
 });

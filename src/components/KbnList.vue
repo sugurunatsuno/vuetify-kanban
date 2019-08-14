@@ -1,0 +1,48 @@
+<template>
+  <v-app>
+    <v-content>
+      {{ name }}
+      <KbnForm v-bind:listId="id" />
+      <draggable>
+        <KbnCard
+          v-for="item in this.$store.getters.allItems"
+          v-bind:key="item.id"
+          v-bind:id="item.id"
+          v-bind:title="item.title"
+          v-bind:listId="id"
+        />
+      </draggable>
+    </v-content>
+  </v-app>
+</template>
+
+<script>
+import KbnForm from "./KbnForm";
+import KbnCard from "./KbnCard";
+import draggable from "vuedraggable";
+
+export default {
+  components: {
+    KbnForm,
+    KbnCard,
+    draggable
+  },
+  props: {
+    id: {
+      type: Number,
+      required: true
+    },
+    name: {
+      type: String,
+      required: true
+    },
+    items: {
+      type: Array,
+      default: () => []
+    }
+  },
+  data: () => ({
+    //
+  })
+};
+</script>

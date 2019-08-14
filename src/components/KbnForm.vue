@@ -3,7 +3,7 @@
     <v-card>
       <v-layout>
         <!-- タスク名入力フォーム -->
-        <v-flex xs12>
+        <v-card-title>
           <v-form>
             <v-text-field
               v-model="title"
@@ -11,13 +11,10 @@
               required
             ></v-text-field>
           </v-form>
-        </v-flex>
-        <v-flex xs6>
-          <v-btn @click="add(title)">追加</v-btn>
-        </v-flex>
-        <v-flex xs6>
-          <v-btn @click="cancel">キャンセル</v-btn>
-        </v-flex>
+        </v-card-title>
+        <v-card-actions>
+          <v-btn @click="add(title, listId)">追加</v-btn>
+        </v-card-actions>
       </v-layout>
     </v-card>
   </v-container>
@@ -26,14 +23,20 @@
 <script>
 import store from "../store";
 export default {
+  props: {
+    listId: {
+      type: Number
+    }
+  },
   data: () => ({
     title: ""
   }),
   methods: {
     // 追加ボタンクリックでタスク名をストアに渡し、自身を消す
-    add: title => {
+    add: (title, listId) => {
       // todo: Vuexストアにtitleを格納する
-      store.commit("addList", { title: title });
+      const list_id = Number(listId);
+      store.commit("addList", { title: title, listId: list_id });
     },
     // 編集を取りやめる
     cancel: () => {

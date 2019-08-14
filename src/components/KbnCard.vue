@@ -1,8 +1,12 @@
 <template>
-  <v-container>
+  <v-container grid-list-md text-center>
     <v-card>
-      <v-card-title>{{ title }}</v-card-title>
-      <v-btn @click="remove(id)">削除</v-btn>
+      <v-layout>
+        <v-card-title>{{ title }}</v-card-title>
+        <v-card-actions>
+          <v-btn @click="remove(id)">削除</v-btn>
+        </v-card-actions>
+      </v-layout>
     </v-card>
   </v-container>
 </template>
@@ -16,6 +20,10 @@ export default {
     },
     id: {
       type: Number
+    },
+    listId: {
+      type: Number,
+      required: true
     }
   },
   methods: {
