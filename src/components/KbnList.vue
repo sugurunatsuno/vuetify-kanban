@@ -3,9 +3,9 @@
     <v-content>
       {{ name }}
       <KbnForm v-bind:listId="id" />
-      <draggable>
+      <draggable :options="{ group: 'items' }">
         <KbnCard
-          v-for="item in this.$store.getters.allItems"
+          v-for="item in this.$store.getters.itemsBy(Number(id))"
           v-bind:key="item.id"
           v-bind:id="item.id"
           v-bind:title="item.title"

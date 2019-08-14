@@ -23,8 +23,8 @@ export default new Vuex.Store({
   },
   actions: {},
   getters: {
-    allItems(state) {
-      return state.lists;
+    itemsBy: state => id => {
+      return state.lists.filter(value => value.listId == id);
     }
   }
 });
