@@ -1,6 +1,9 @@
 <template>
   <v-container grid-list-md text-center>
-    <v-card>
+    <v-btn @click="clicked = !clicked" v-if="!clicked">
+      新しくタスクを追加
+    </v-btn>
+    <v-card v-else>
       <v-layout>
         <!-- タスク名入力フォーム -->
         <v-card-title>
@@ -13,7 +16,14 @@
           </v-form>
         </v-card-title>
         <v-card-actions>
-          <v-btn @click="add(title, listId)">追加</v-btn>
+          <v-btn
+            @click="
+              add(title, listId);
+              clicked = !clicked;
+            "
+            >追加</v-btn
+          >
+          <v-btn @click="clicked = !clicked">キャンセル</v-btn>
         </v-card-actions>
       </v-layout>
     </v-card>
@@ -23,9 +33,14 @@
 <script>
 import store from "../store";
 export default {
+  components: {},
   props: {
     listId: {
       type: Number
+    },
+    clicked: {
+      type: Boolean,
+      default: false
     }
   },
   data: () => ({
@@ -37,10 +52,6 @@ export default {
       // todo: Vuexストアにtitleを格納する
       const list_id = Number(listId);
       store.commit("addList", { title: title, listId: list_id });
-    },
-    // 編集を取りやめる
-    cancel: () => {
-      // todo: 編集を取りやめる
     }
   }
 };
